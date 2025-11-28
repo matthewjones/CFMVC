@@ -1,19 +1,11 @@
-![fw1_logo](https://github.com/framework-one/fw1/blob/develop/css/fw1logo7.jpg)
+# CFMVC (ColdFusion Model View Controller Framework) 
 
-# FW/1 (Framework One) 
-![Build Status](https://github.com/framework-one/fw1/actions/workflows/fw1_java11.yml/badge.svg) 
-![4.3.2 Deploy Status](https://github.com/framework-one/fw1/actions/workflows/deploy_4.3.2.yml/badge.svg) 
-
-[//]: # "![Build Status](https://github.com/framework-one/fw1/actions/workflows/fw1_boxlang.yml/badge.svg)"
-
-This FW/1 directory is a complete web application and expects to live in its own
-webroot if you plan to run the applications within it. To use FW/1 in a separate
+This directory is a complete web application and expects to live in its own
+webroot if you plan to run the applications within it. To use CFMVC in a separate
 webroot you can either copy the `framework` directory to that webroot or add a mapping
 for `/framework` to the `framework` folder inside this FW/1 directory. Note that since
 your `Application.cfc` needs to extend `framework.one`, you have to add the mapping
 in your admin - you can't just use a per-application mapping.
-
-Please read the [Framework One Code of Conduct](https://github.com/framework-one/fw1/blob/develop/CODE_OF_CONDUCT.md) - we want FW/1 to be a welcoming and supportive environment for everyone to feel comfortable contributing!
 
 # Resources
 
