@@ -1,4 +1,4 @@
-# CFMVC (ColdFusion Model View Controller Framework) 
+# CFMVC (ColdFusion Model View Controller Framework)
 
 This directory is a complete web application and expects to live in its own
 webroot if you plan to run the applications within it. To use CFMVC in a separate
@@ -8,8 +8,6 @@ your `Application.cfc` needs to extend `framework.one`, you have to add the mapp
 in your admin - you can't just use a per-application mapping.
 
 # Resources
-
-**Demo sites:** v4.3.2 - https://fw1-4.3.2.mycfspace.org
 
 **Project home:** https://github.com/framework-one/fw1
 
@@ -29,9 +27,17 @@ To run tests locally, you'll need [CommandBox](https://www.ortussolutions.com/pr
 
 Then run `box install` once to install the dependencies (TestBox is the only one currently).
 
-Then start a server on port 8500 with your choice of CFML engine, e.g.,
+Then start a server on port 8500 with your choice of CFML engine ( javaVersion=openjdk11 ), e.g.,
+
+    box server start cfengine=lucee@6 port=8500
 
     box server start cfengine=lucee@5 port=8500
+
+    box server start cfengine=adobe@2018 port=8500
+
+    box server start cfengine=adobe@2021 port=8500
+
+    box server start cfengine=adobe@2023 port=8500
 
 This will open a browser, running the FW/1 "Introduction" app.
 
