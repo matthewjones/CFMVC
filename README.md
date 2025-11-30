@@ -21,7 +21,11 @@ in your admin - you can't just use a per-application mapping.
 
 # Running the Tests
 
-FW/1 is setup to run tests using [GitHub Actions](/actions/workflows/cfmvc_java11.yml) using the `cfmvc_java11.yml` (lucee@6, lucee@5, adobe@2023, adobe@2021, adobe@2018) and `cfmvc_java21.yml` (lucee@6, adobe@2025) workflow files. (lucee@7 isn't available to github actions yet, local tests do run)
+FW/1 is setup to run tests using [GitHub Actions](/actions/workflows/cfmvc_java11.yml) using the `cfmvc_java11.yml` (lucee@6, lucee@5, adobe@2023, adobe@2021, adobe@2018) and `cfmvc_java21.yml` (lucee@6, adobe@2025, boxlang) workflow files.
+
+Notes (lucee@7 isn't available to github actions yet, local tests do run. boxlang is running green, but there are 25 tests currently being skipped that need addressed.)
+
+Tests were run with TestBox 6.4.0; current stable versions under openjdk11 (Lucee@5.4.8.2, Lucee@6.2.3+35, Adobe@2018.0.19+330149, Adobe@2021.0.22+330451, Adobe@2023.0.16+330828); current stable versions under openjdk21 (Lucee@6.2.3+35, Lucee@7.0.0+395, Adobe@2025.0.04+331512, Boxlang@1.7.0+43 *skipping 25 tests*)
 
 To run tests locally, you'll need [CommandBox](https://www.ortussolutions.com/products/commandbox) installed.
 
@@ -44,6 +48,8 @@ Then start a server on port 8500 with your choice of CFML engine ( javaVersion=o
     box server start cfengine=lucee@7 port=8500 javaVersion=openjdk21
 
     box server start cfengine=adobe@2025 port=8500 javaVersion=openjdk21
+
+    box server start cfengine=boxlang port=8500 javaVersion=openjdk21
 
 This will open a browser, running the FW/1 "Introduction" app.
 
