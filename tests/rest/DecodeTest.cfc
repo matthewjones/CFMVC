@@ -20,7 +20,7 @@ component extends="mxunit.framework.TestCase" {
         assertEquals( "a,b,c", actual.single );
         assertEquals( "1,2,3,40,50", actual.multi );
     }
-    
+
     function testPostJSONEncodedRequestDecodesMultiField() {
         var actual = doJSONEncodedHTTPRequest( "POST" );
         assertEquals( "POST", actual.method );
@@ -53,15 +53,13 @@ component extends="mxunit.framework.TestCase" {
     }
 
     private function doHTTPRequest( verb, contentType, body ) {
-        var httpService = new http();
-        httpService.setmethod( verb );
-        httpService.setCharset( "utf-8" );
-        httpService.setUrl( "http://#CGI.SERVER_NAME#:#CGI.SERVER_PORT#/examples/rest/?action=main.#verb#" ); 
-        httpService.addParam( type = "header", name = "content-type", value = contentType );
-        httpService.addParam( type = "body", value = body );
-        var response = httpService.send().getPrefix().filecontent;
-        if ( isJson( response ) ) {
-            return deserializeJSON( response );
+        var response = {};
+        cfhttp( method="#verb#", charset="utf-8", url="http://#CGI.SERVER_NAME#:#CGI.SERVER_PORT#/examples/rest/?action=main.#verb#", result="response" ) {
+            cfhttpparam( type = "header", name = "content-type", value = contentType );
+            cfhttpparam( type = "body", value = body );
+        }
+        if ( isJson( response.filecontent ) ) {
+            return deserializeJSON( response.filecontent );
         }
         fail( "expected a JSON response for #verb# #contentType#" );
     }
