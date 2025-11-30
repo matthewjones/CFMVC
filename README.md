@@ -41,6 +41,8 @@ Then start a server on port 8500 with your choice of CFML engine ( javaVersion=o
 
     box server start cfengine=adobe@2025 port=8500 javaVersion=openjdk21_jdk
 
+    box server start cfengine=lucee@7 port=8500 javaVersion=openjdk21_jdk
+
 This will open a browser, running the FW/1 "Introduction" app.
 
 You can then run the tests:
