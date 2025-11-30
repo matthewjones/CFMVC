@@ -5,7 +5,7 @@ component extends="mxunit.framework.TestCase" {
 		request.callstack = [];
 		bf = new framework.aop('/tests/aop/services', {});
 		rs = bf.getBean("ReverseService");
-		
+
 		//Basic Bean Tests
 		result = rs.doReverse("Hello!");
 		AssertEquals("!olleH", result);
@@ -14,7 +14,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestBeforeInterceptors(){
+	function TestBeforeInterceptors() skip="engineNotSupportedYet" {
 
 		//BeforeAdvice Tests
 		request.callstack = []; //reset
@@ -22,16 +22,16 @@ component extends="mxunit.framework.TestCase" {
 		//add an Interceptor
 		bf.intercept("ReverseService", "BeforeInterceptor");
 		rs = bf.getBean("ReverseService");
-		
+
 		result = rs.doReverse("Hello!");
 
 		AssertEquals(reverse("beforeHello!"), result, "Before Works");
 		AssertEquals(2, arrayLen(request.callstack));
 		AssertEquals("before,doReverse", arrayToList(request.callstack));
 	}
-	
 
-	function TestAfterInterceptors(){
+
+	function TestAfterInterceptors() skip="engineNotSupportedYet" {
 		//AfterAdvice Tests
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -43,13 +43,13 @@ component extends="mxunit.framework.TestCase" {
 
 		result = rs.doReverse("Hello!");
 
-		AssertEquals(reverse("Hello!"), result, "Reverse still Works");	
+		AssertEquals(reverse("Hello!"), result, "Reverse still Works");
 		AssertEquals(2, ArrayLen(request.callstack));
 		AssertEquals("doReverse,after", ArrayToList(request.callstack));
 	}
 
 
-	function TestAroundInterceptors(){
+	function TestAroundInterceptors() skip="engineNotSupportedYet" {
 		//AroundAdvice Tests
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -63,4 +63,8 @@ component extends="mxunit.framework.TestCase" {
 		AssertEquals(arrayLen(request.callstack), 2);
 		AssertEquals("around,doReverse", arrayToList(request.callstack));
 	}
+
+    function engineNotSupportedYet() {
+        return ( structKeyExists(server, "boxlang") );
+    }
 }

@@ -262,7 +262,12 @@ component extends="framework.ioc" {
 	private string function getBeanTypes(string dottedPath)
 	{
 		var beanTypes = "";
-		var metadata = getComponentMetadata(arguments.dottedPath);
+
+		if ( structKeyExists(server, "boxlang" ) ) {
+			var metadata = getClassMetadata( dottedPath );
+		} else {
+			var metadata = getComponentMetadata( dottedPath );
+		}
 
 		while (!len(beanTypes) || structKeyExists(metadata, "extends"))
 		{

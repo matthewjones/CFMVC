@@ -1,7 +1,8 @@
 component extends="framework.one" {
 
+    this.name = hash("examples-skinning");
 	this.sessionManagement = true;
-	
+
 	variables.framework = structNew();
 	variables.framework.defaultItem = 'index';
 

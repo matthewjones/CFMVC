@@ -26,11 +26,13 @@ component {
             requestDefaultsInitialized = false,
             routeMethodsMatched = { },
             doTrace = false,
-            trace = [ ]
+            trace = [ ],
+            getContextRoot = ( len(getContextRoot()) && getContextRoot() != "/" ? getContextRoot() : '' )
         };
-        if ( len( getContextRoot() ) ) {
-            request._fw1.cgiScriptName = replace( CGI.SCRIPT_NAME, getContextRoot(), '' );
-            request._fw1.cgiPathInfo = replace( CGI.PATH_INFO, getContextRoot(), '' );
+        // boxlangs empty getContextRoot() is not same
+        if ( len( request._fw1.getContextRoot ) ) {
+            request._fw1.cgiScriptName = replace( CGI.SCRIPT_NAME, request._fw1.getContextRoot, '' );
+            request._fw1.cgiPathInfo = replace( CGI.PATH_INFO, request._fw1.getContextRoot, '' );
         }
     }
     // do not rely on these, they are meant to be true magic...
@@ -2360,7 +2362,7 @@ component {
         var omitIndex = false;
         var optionalOmit = false;
         if ( path == 'useCgiScriptName' ) {
-            path = getContextRoot() & request._fw1.cgiScriptName;
+            path = request._fw1.getContextRoot & request._fw1.cgiScriptName;
             optionalOmit = true;
         } else if ( path == 'useRequestURI' ) {
             path = getPageContext().getRequest().getRequestURI();
@@ -2819,7 +2821,7 @@ component {
     }
 
     /**
-     * Starts with default framework configuration values and overrides these as required for any subsystem configurations which may exist; 
+     * Starts with default framework configuration values and overrides these as required for any subsystem configurations which may exist;
      * creates the request.params key if it doesn't exist
      */
     private void function processRequestParams() {
@@ -2827,11 +2829,11 @@ component {
         if( !structkeyexists( request, "params" ) ) {
 
             // start with default config values
-            request.params = { 
-                "decodeRequestBody" : variables.framework.decodeRequestBody, 
+            request.params = {
+                "decodeRequestBody" : variables.framework.decodeRequestBody,
                 "routesCaseSensitive" : variables.framework.routesCaseSensitive,
-                "preflightOptions" : variables.framework.preflightOptions,       
-                "optionsAccessControl" : variables.framework.optionsAccessControl 
+                "preflightOptions" : variables.framework.preflightOptions,
+                "optionsAccessControl" : variables.framework.optionsAccessControl
             };
 
             // if we're in a subsystem request and that subsystem has a specific config for it, apply those overrides
@@ -2849,11 +2851,11 @@ component {
     }
 
     /**
-     * Returns the subsystem-aware value for the given parameter;  if request.params has not been 
+     * Returns the subsystem-aware value for the given parameter;  if request.params has not been
      * created when this function is called, it is created on the fly
      *
      * @name string     name of the parameter in request.params to return
-     * 
+     *
      * @return any
      */
     private any function getRequestParam( required string name ) {

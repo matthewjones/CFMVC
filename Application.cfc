@@ -20,7 +20,7 @@ component {
                 trace = true,
                 missingview = 'main.missingview',
                 base = getDirectoryFromPath( CGI.SCRIPT_NAME )
-                    .replaceFirst( getContextRoot(), '' ) & 'introduction'
+                    .replaceFirst( ( len(getContextRoot()) && getContextRoot() != "/" ? getContextRoot() : '' ), '' ) & 'introduction'
             } );
 
             // you can specify FW/1 configuration as an argument:

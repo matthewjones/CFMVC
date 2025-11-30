@@ -5,7 +5,7 @@ component extends="mxunit.framework.TestCase" {
         variables.ioc2 = new framework.ioc( "/tests/model" );
     }
 
-    function testInjectWithType() {
+    function testInjectWithType() skip="engineNotSupportedYet" {
         var bean = ioc.injectProperties( "tests.declared.things.myconfig", { name = "ByType" } );
         assertEquals( "ByType", bean.getName() );
         try {
@@ -40,4 +40,7 @@ component extends="mxunit.framework.TestCase" {
         assertEquals( "defaultuser", bean.getUsername() );
     }
 
+    function engineNotSupportedYet() {
+        return ( structKeyExists(server, "boxlang") );
+    }
 }

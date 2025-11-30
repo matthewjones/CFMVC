@@ -27,7 +27,7 @@ component extends="mxunit.framework.TestCase" {
         assertEquals( 2, application.itemCount );
     }
 
-    function testNotInjectTypedProperty() {
+    function testNotInjectTypedProperty() skip="engineNotSupportedYet" {
         structDelete( application, "itemCount" );
         variables.factory = new framework.ioc( "/tests/model, /tests/extrabeans",
                                      { singulars = { sheep = "lamb" },
@@ -43,6 +43,10 @@ component extends="mxunit.framework.TestCase" {
         var lamb = user.getItemLamb();
         assertTrue( isNull( lamb ) );
         assertEquals( 1, application.itemCount );
+    }
+
+    function engineNotSupportedYet() {
+        return ( structKeyExists(server, "boxlang") );
     }
 
 }

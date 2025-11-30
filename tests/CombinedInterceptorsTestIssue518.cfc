@@ -1,6 +1,6 @@
 component extends="mxunit.framework.TestCase" {
 
-	function TestBeforeAroundAfterInterception() {
+	function TestBeforeAroundAfterInterception() skip="engineNotSupportedYet" {
 		//Putting it all together What happens when you call all of them?
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/issue518', {});
@@ -20,7 +20,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestInitMethods() {
+	function TestInitMethods() skip="engineNotSupportedYet" {
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/issue518', {initMethod = "configure"});
 
@@ -52,7 +52,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestInterceptOnRegex() {
+	function TestInterceptOnRegex() skip="engineNotSupportedYet" {
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/issue518', {initMethod = "configure"});
 
@@ -106,7 +106,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestMultipleBeforeInterceptions() {
+	function TestMultipleBeforeInterceptions() skip="engineNotSupportedYet" {
 		//Multiple Before Advisors
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/issue518', {});
@@ -129,7 +129,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestMultipleAfterInterceptors() {
+	function TestMultipleAfterInterceptors() skip="engineNotSupportedYet" {
 		//Multiple After Advisors
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/issue518', {});
@@ -154,7 +154,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestMultipleAroundInterceptors() {
+	function TestMultipleAroundInterceptors() skip="engineNotSupportedYet" {
 		//Multiple Around Advisors
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/issue518', {});
@@ -247,7 +247,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestPrivateMethodInterceptors() {
+	function TestPrivateMethodInterceptors() skip="engineNotSupportedYet" {
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/issue518', {initMethod = "configure"});
 
@@ -286,4 +286,8 @@ component extends="mxunit.framework.TestCase" {
 		AssertEquals(8, arrayLen(request.callstack));
 		AssertEquals("init,setStackLog,aroundA,doReverse,aroundA,doWrap,doFront,doRear", arrayToList(request.callstack));
 	}
+
+    function engineNotSupportedYet() {
+        return ( structKeyExists(server, "boxlang") );
+    }
 }

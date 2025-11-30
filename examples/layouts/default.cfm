@@ -18,10 +18,34 @@
 			<div class="text-center">
 				<a href="https://github.com/framework-one/fw1">FW/1</a> is copyright (c) 2009-<cfoutput>#year( now() )#</cfoutput>, Sean Corfield, Marcin Szczepanski, Ryan Cogswell -
 				<a href="http://www.apache.org/licenses/LICENSE-2.0">Licensed under the Apache License, Version 2.0</a><br />
-				You are running FW/1 version <cfoutput>#variables.framework.version# on #server.coldfusion.productname & " " &
-					( structKeyExists( server, "lucee" ) ?
-						server.lucee.version & " / " : "" ) &
-					server.coldfusion.productversion#</cfoutput>.
+				<cfoutput encodefor="html">
+					<div class="d-flex gap-3 justify-content-center">
+						<div>Running:</div>
+						<div>cfmvc: #variables.framework.version# </div>
+						<div>CF: #getEngineVersion()#</div>
+						<div>Java: #server.system.properties["java.version"]#</div>
+						<div>OS: #server.os.name#</div>
+					</div>
+				</cfoutput>
+				<cfscript>
+					private string function determineEngine() {
+						if ( structKeyExists(server, "coldfusion" ) && findNoCase( "ColdFusion Server", server.coldfusion.productName ) )
+							return "ColdFusion";
+						if ( structKeyExists(server, "boxlang" ) )
+							return "Boxlang";
+						return "Lucee";
+					}
+
+					public string function getEngineVersion() {
+						local.theEngine = determineEngine();
+						if ( local.theEngine is "ColdFusion" ) {
+							local.theVersion = server.coldfusion.productversion;
+						} else {
+							local.theVersion = server[ LCase(local.theEngine) ].version;
+						}
+						return local.theEngine & " " & local.theVersion;
+					}
+				</cfscript>
 			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

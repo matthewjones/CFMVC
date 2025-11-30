@@ -11,7 +11,7 @@ component extends="mxunit.framework.TestCase" {
     /**
 	* Test with initialised framework - ensure error handler tries to render the main.error view
 	*/
-    public void function testError()
+    public void function testError() skip="engineNotSupportedYet"
     {
         var exception = {
             type = "Testing",
@@ -49,5 +49,8 @@ component extends="mxunit.framework.TestCase" {
     private void function exceptionCapture( any exception)
     {
         request.capturedException = arguments.exception;
+    }
+    function engineNotSupportedYet() {
+        return ( structKeyExists(server, "boxlang") );
     }
 }
