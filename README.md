@@ -21,7 +21,7 @@ in your admin - you can't just use a per-application mapping.
 
 # Running the Tests
 
-FW/1 is setup to run tests using [GitHub Actions](https://github.com/framework-one/fw1/actions/workflows/fw1_java11.yml) using the `fw1_java11.yml` and `fw1_boxlang.yml` workflow files.
+FW/1 is setup to run tests using [GitHub Actions](/actions/workflows/cfmvc_java11.yml) using the `cfmvc_java11.yml` (lucee@6, lucee@5, adobe@2023, adobe@2021, adobe@2018) and `cfmvc_java21.yml` (lucee@6, adobe@2025) workflow files. (lucee@7 isn't available to github actions yet, local tests do run)
 
 To run tests locally, you'll need [CommandBox](https://www.ortussolutions.com/products/commandbox) installed.
 
@@ -39,7 +39,11 @@ Then start a server on port 8500 with your choice of CFML engine ( javaVersion=o
 
     box server start cfengine=adobe@2023 port=8500
 
-    box server start cfengine=adobe@2025 port=8500 javaVersion=openjdk21_jdk
+    box server start cfengine=lucee@6 port=8500 javaVersion=openjdk21
+
+    box server start cfengine=lucee@7 port=8500 javaVersion=openjdk21
+
+    box server start cfengine=adobe@2025 port=8500 javaVersion=openjdk21
 
 This will open a browser, running the FW/1 "Introduction" app.
 
