@@ -50,7 +50,9 @@ component extends="mxunit.framework.TestCase" {
     {
         request.capturedException = arguments.exception;
     }
+
     function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
+        return false;
+        // return ( structKeyExists(server, "boxlang") ); requires esapi module (box install bx-esapi)
     }
 }
