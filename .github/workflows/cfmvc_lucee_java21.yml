@@ -10,7 +10,7 @@ jobs:
   test:
     strategy:
       matrix:
-        engine: [ "lucee@6", "lucee@7.0.0+395" ]
+        engine: [ "lucee@6", "lucee@7" ]
 
     runs-on: ubuntu-latest
 
