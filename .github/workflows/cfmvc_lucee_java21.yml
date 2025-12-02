@@ -10,7 +10,7 @@ jobs:
   test:
     strategy:
       matrix:
-        engine: [ adobe@2025, boxlang ]
+        engine: [ lucee@6, lucee@7 ]
 
     runs-on: ubuntu-latest
 
@@ -33,18 +33,6 @@ jobs:
 
     - name: Install dependencies
       run: box install
-
-    - name: start boxlang
-      if: ${{ matrix.engine == 'boxlang' }}
-      run: box server start cfengine=${{ matrix.engine }} port=8500 openbrowser=false
-
-    - name: Install boxlang packages
-      if: ${{ matrix.engine == 'boxlang' }}
-      run: box install bx-esapi
-
-    - name: stop boxlang
-      if: ${{ matrix.engine == 'boxlang' }}
-      run: box server stop
 
     - name: Start the ${{ matrix.engine }} CFML engine
       run: box server start cfengine=${{ matrix.engine }} port=8500 openbrowser=false
