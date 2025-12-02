@@ -34,6 +34,9 @@ jobs:
     - name: Install dependencies
       run: box install
 
+    - name: Ensure cfconfig is up to date
+      run: box install commandbox-cfonfig --force
+
     - name: Start the ${{ matrix.engine }} CFML engine
       run: box server start cfengine=${{ matrix.engine }} port=8500 openbrowser=false
 
