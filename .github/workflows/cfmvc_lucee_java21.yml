@@ -1,4 +1,4 @@
-name: cfmvc Java 21
+name: cfmvc Lucee with Java 21
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
   test:
     strategy:
       matrix:
-        engine: [ lucee@6, lucee@7 ]
+        engine: [ "lucee@6", "lucee@7-snapshot" ]
 
     runs-on: ubuntu-latest
 
