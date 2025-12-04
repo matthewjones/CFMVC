@@ -2,9 +2,9 @@ name: cfmvc Java 21
 
 on:
   push:
-    branches: [ "develop", "develop_mj_main" ]
+    branches: [ "develop", "5.0.0", "develop_mj_main" ]
   pull_request:
-    branches: [ "develop", "develop_mj_main" ]
+    branches: [ "develop", "5.0.0", "develop_mj_main" ]
 
 jobs:
   test:
@@ -45,9 +45,6 @@ jobs:
 
     - name: Install boxlang package esapi
       run: box install bx-esapi
-
-    - name: Install boxlang packages unsave eval
-      run: box install bx-unsafe-evaluate
 
     - name: stop boxlang
       run: box server stop

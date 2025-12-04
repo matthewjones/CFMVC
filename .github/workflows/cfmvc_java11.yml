@@ -2,9 +2,9 @@ name: cfmvc Java 11
 
 on:
   push:
-    branches: [ "develop", "5.0.0" ]
+    branches: [ "develop", "5.0.0", "develop_mj_main" ]
   pull_request:
-    branches: [ "develop", "5.0.0" ]
+    branches: [ "develop", "5.0.0", "develop_mj_main" ]
 
 jobs:
   test:
