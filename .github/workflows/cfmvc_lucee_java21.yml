@@ -1,16 +1,16 @@
-name: fw1 BoxLang
+name: cfmvc lucee java 21
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop", "5.0.0", "develop_mj_main" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "develop", "5.0.0", "develop_mj_main" ]
 
 jobs:
   test:
     strategy:
       matrix:
-        engine: [ boxlang, boxlang@be ]
+        engine: [ "lucee@6", "lucee@7" ]
 
     runs-on: ubuntu-latest
 
@@ -31,26 +31,17 @@ jobs:
     - name: Update apt and install commandbox
       run: sudo apt-get update && sudo apt-get install apt-transport-https commandbox
 
-    - name: Install boxlang
-      run: box install commandbox-boxlang
+    - name: Install dependencies
+      run: box install
+
+    - name: Ensure cfconfig is up to date
+      run: box install commandbox-cfconfig --force
 
     - name: Start the ${{ matrix.engine }} CFML engine
-      run: box server start cfengine=${{ matrix.engine }} port=8500 openbrowser=false javaVersion=openjdk21_jdk
+      run: box server start cfengine=${{ matrix.engine }} port=8500 openbrowser=false
 
-    - name: Install bx-compat
-      run: box install bx-compat
-
-    - name: Stop boxlang after bx-compat install
-      run: box server stop
-
-    - name: Restart boxlang after bx-compat install
-      run: box server start cfengine=${{ matrix.engine }} port=8500 openbrowser=false javaVersion=openjdk21_jdk
-
-    - name: Install testbox dependency
-      run: box install testbox
-      
     - name: Run test
-      run: |        
+      run: |
         testResults="echo $(box testbox run reporter=mintext)";
         echo "$testResults";
         if grep -i "\[Failures: [1-9][0-9]\?[0-9]\?\]\|\[Errors: [1-9][0-9]\?[0-9]\?\]\|<t[^>]*>\|<b[^>]*>" <<< $testResults;  then exit 1; fi
