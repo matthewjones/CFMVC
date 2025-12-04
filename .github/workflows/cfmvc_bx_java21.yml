@@ -10,7 +10,7 @@ jobs:
   test:
     strategy:
       matrix:
-        engine: [ "boxlang@1.8.0-snapshot", "boxlang@be" ]
+        engine: [ "boxlang@be" ]
 
     runs-on: ubuntu-latest
 
@@ -37,10 +37,14 @@ jobs:
     - name: start boxlang
       run: box server start cfengine=${{ matrix.engine }} port=8500 openbrowser=false
 
-    - name: Install boxlang packages
+    - name: Install boxlang package cf compat
       run: box install bx-compat-cfml
-        box install bx-esapi
-        box install bx-unsafe-evaluate
+
+    - name: Install boxlang package esapi
+      run: box install bx-esapi
+
+    - name: Install boxlang packages unsave eval
+      run: box install bx-unsafe-evaluate
 
     - name: stop boxlang
       run: box server stop
