@@ -65,7 +65,7 @@ component extends="mxunit.framework.TestCase" {
     }
 
     function engineNotSupported() {
-        return server.coldfusion.productname != "Lucee" && ListFirst( server.coldfusion.productversion ) == 10;
+        return (structKeyExists(server, "coldfusion") && server.coldfusion.productname != "Lucee" && ListFirst( server.coldfusion.productversion ) == 10);
     }
 
 }

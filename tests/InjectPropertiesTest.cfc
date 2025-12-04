@@ -12,7 +12,11 @@ component extends="mxunit.framework.TestCase" {
             var data = bean.getConfig();
             fail( "constructor should not have been called" );
         } catch ( any e ) {
-            assertEquals( "expression", e.type );
+            if ( structKeyExists(server, "boxlang") ) {
+                assertEquals( "application", e.type );
+            } else {
+                assertEquals( "expression", e.type );
+            }
         }
     }
 
