@@ -20,7 +20,7 @@ component extends="tests.InjectableTest" {
         variables.fwVars.framework.preflightOptions = true;
     }
 
-    public void function testProcessRoutes() skip="engineNotSupportedYet" {
+    public void function testProcessRoutes() {
 
         request._fw1.cgiRequestMethod = 'GET';
 
@@ -43,7 +43,7 @@ component extends="tests.InjectableTest" {
 
     }
 
-    public void function testProcessRoutesExplicit() skip="engineNotSupportedYet" {
+    public void function testProcessRoutesExplicit() {
 
         request._fw1.cgiRequestMethod = 'FOO';
 
@@ -96,8 +96,5 @@ component extends="tests.InjectableTest" {
 
     private boolean function isFrameworkInitialized() {
         return false;
-    }
-    function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
     }
 }

@@ -36,7 +36,7 @@ component extends="tests.InjectableTest" {
         assertEquals("default.main?foo=\1&baz=\2/\3", match.target);
     }
 
-    public void function testRouteMatchRegex() skip="engineNotSupportedYet"
+    public void function testRouteMatchRegex()
     {
         match = variables.fw.processRouteMatch("/test2/:id", "default.main?id=:id", "/test2/5/people", "GET");
         assertTrue(match.matched);
@@ -157,8 +157,4 @@ component extends="tests.InjectableTest" {
         assertEquals( "/product/:ignore", uri );
     }
 
-
-    function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
-    }
 }

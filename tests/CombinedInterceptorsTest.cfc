@@ -1,6 +1,6 @@
 component extends="mxunit.framework.TestCase" {
 
-	function TestBeforeAroundAfterInterception() skip="engineNotSupportedYet" {
+	function TestBeforeAroundAfterInterception() {
 		//Putting it all together What happens when you call all of them?
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -20,7 +20,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestInitMethods() skip="engineNotSupportedYet" {
+	function TestInitMethods() {
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {initMethod = "configure"});
 
@@ -52,7 +52,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestInterceptOnRegex() skip="engineNotSupportedYet" {
+	function TestInterceptOnRegex() {
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {initMethod = "configure"});
 
@@ -106,7 +106,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestMultipleBeforeInterceptions() skip="engineNotSupportedYet" {
+	function TestMultipleBeforeInterceptions() {
 		//Multiple Before Advisors
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -129,7 +129,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestMultipleAfterInterceptors() skip="engineNotSupportedYet" {
+	function TestMultipleAfterInterceptors() {
 		//Multiple After Advisors
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -154,7 +154,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestMultipleAroundInterceptors() skip="engineNotSupportedYet" {
+	function TestMultipleAroundInterceptors() {
 		//Multiple Around Advisors
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -247,7 +247,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestPrivateMethodInterceptors() skip="engineNotSupportedYet" {
+	function TestPrivateMethodInterceptors() {
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {initMethod = "configure"});
 
@@ -286,8 +286,4 @@ component extends="mxunit.framework.TestCase" {
 		AssertEquals(8, arrayLen(request.callstack));
 		AssertEquals("init,setStackLogService,aroundA,doReverse,aroundA,doWrap,doFront,doRear", arrayToList(request.callstack));
 	}
-
-    function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
-    }
 }

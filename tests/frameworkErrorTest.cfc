@@ -11,7 +11,7 @@ component extends="mxunit.framework.TestCase" {
     /**
 	* Test with initialised framework - ensure error handler tries to render the main.error view
 	*/
-    public void function testError() skip="engineNotSupportedYet"
+    public void function testError()
     {
         var exception = {
             type = "Testing",
@@ -51,8 +51,4 @@ component extends="mxunit.framework.TestCase" {
         request.capturedException = arguments.exception;
     }
 
-    function engineNotSupportedYet() {
-        return false;
-        // return ( structKeyExists(server, "boxlang") ); requires esapi module (box install bx-esapi)
-    }
 }

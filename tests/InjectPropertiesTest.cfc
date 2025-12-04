@@ -5,14 +5,18 @@ component extends="mxunit.framework.TestCase" {
         variables.ioc2 = new framework.ioc( "/tests/model" );
     }
 
-    function testInjectWithType() skip="engineNotSupportedYet" {
+    function testInjectWithType() {
         var bean = ioc.injectProperties( "tests.declared.things.myconfig", { name = "ByType" } );
         assertEquals( "ByType", bean.getName() );
         try {
             var data = bean.getConfig();
             fail( "constructor should not have been called" );
         } catch ( any e ) {
-            assertEquals( "expression", e.type );
+            if ( structKeyExists(server, "boxlang") ) {
+                assertEquals( "application", e.type );
+            } else {
+                assertEquals( "expression", e.type );
+            }
         }
     }
 
@@ -40,7 +44,4 @@ component extends="mxunit.framework.TestCase" {
         assertEquals( "defaultuser", bean.getUsername() );
     }
 
-    function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
-    }
 }

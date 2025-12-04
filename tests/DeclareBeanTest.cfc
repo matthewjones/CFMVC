@@ -75,7 +75,7 @@ component extends="mxunit.framework.TestCase" {
         assertEquals( "some", item.getConfig() );
     }
 
-    function testDeclareInteractWithDefault() skip="engineNotSupportedYet" {
+    function testDeclareInteractWithDefault() {
         var bf = new framework.ioc( "", { omitDefaultedProperties = false } ).declareBean( "foo", "tests.declared.things.myconfig" )
             .addBean( "dftname", "injected" );
         var item = bf.getBean( "foo" );
@@ -84,10 +84,6 @@ component extends="mxunit.framework.TestCase" {
             .addBean( "dftname", "injected" );
         var item = bf.getBean( "foo" );
         assertEquals( "default", item.getDftName() );
-    }
-
-    function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
     }
 
 }

@@ -14,7 +14,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestBeforeInterceptors() skip="engineNotSupportedYet" {
+	function TestBeforeInterceptors(){
 
 		//BeforeAdvice Tests
 		request.callstack = []; //reset
@@ -31,7 +31,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestAfterInterceptors() skip="engineNotSupportedYet" {
+	function TestAfterInterceptors(){
 		//AfterAdvice Tests
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -49,7 +49,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 
-	function TestAroundInterceptors() skip="engineNotSupportedYet" {
+	function TestAroundInterceptors(){
 		//AroundAdvice Tests
 		request.callstack = []; //reset
 		bf = new framework.aop('/tests/aop/services,/tests/aop/interceptors', {});
@@ -63,8 +63,4 @@ component extends="mxunit.framework.TestCase" {
 		AssertEquals(arrayLen(request.callstack), 2);
 		AssertEquals("around,doReverse", arrayToList(request.callstack));
 	}
-
-    function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
-    }
 }

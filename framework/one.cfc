@@ -26,13 +26,11 @@ component {
             requestDefaultsInitialized = false,
             routeMethodsMatched = { },
             doTrace = false,
-            trace = [ ],
-            getContextRoot = ( len(getContextRoot()) && getContextRoot() != "/" ? getContextRoot() : '' )
+            trace = [ ]
         };
-        // boxlangs empty getContextRoot() is not same
-        if ( len( request._fw1.getContextRoot ) ) {
-            request._fw1.cgiScriptName = replace( CGI.SCRIPT_NAME, request._fw1.getContextRoot, '' );
-            request._fw1.cgiPathInfo = replace( CGI.PATH_INFO, request._fw1.getContextRoot, '' );
+        if ( len( getContextRoot() ) ) {
+            request._fw1.cgiScriptName = replace( CGI.SCRIPT_NAME, getContextRoot(), '' );
+            request._fw1.cgiPathInfo = replace( CGI.PATH_INFO, getContextRoot(), '' );
         }
     }
     // do not rely on these, they are meant to be true magic...
@@ -2362,7 +2360,7 @@ component {
         var omitIndex = false;
         var optionalOmit = false;
         if ( path == 'useCgiScriptName' ) {
-            path = request._fw1.getContextRoot & request._fw1.cgiScriptName;
+            path = getContextRoot() & request._fw1.cgiScriptName;
             optionalOmit = true;
         } else if ( path == 'useRequestURI' ) {
             path = getPageContext().getRequest().getRequestURI();

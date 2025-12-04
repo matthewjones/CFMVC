@@ -1,6 +1,6 @@
 component extends="mxunit.framework.TestCase" {
 
-    function testNotInjectTransient() skip="engineNotSupportedYet" {
+    function testNotInjectTransient() {
         variables.factory = new framework.ioc( "/tests/model, /tests/extrabeans",
                                      { transients = [ "fish" ], singulars = { sheep = "bean" } } );
         assertTrue( variables.factory.containsBean( "item" ) );
@@ -59,7 +59,4 @@ component extends="mxunit.framework.TestCase" {
         assertEquals( "two", c2.two );
     }
 
-    function engineNotSupportedYet() {
-        return ( structKeyExists(server, "boxlang") );
-    }
 }
